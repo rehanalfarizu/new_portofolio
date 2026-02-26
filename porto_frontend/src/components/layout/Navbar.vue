@@ -74,7 +74,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .navbar--scrolled {
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(8, 13, 24, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 0.75rem 0;
@@ -99,7 +99,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .brand-dot {
-  color: #818cf8;
+  color: #6366f1;
 }
 
 .navbar__links {
@@ -120,7 +120,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .navbar__links a:hover {
-  color: #818cf8;
+  color: #f1f5f9;
 }
 
 .navbar__hamburger {
@@ -157,7 +157,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  background: rgba(15, 23, 42, 0.97);
+  background: rgba(8, 13, 24, 0.97);
 }
 
 .navbar__mobile--open {
@@ -183,7 +183,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .navbar__mobile a:hover {
-  color: #818cf8;
+  color: #f1f5f9;
 }
 
 @media (max-width: 768px) {

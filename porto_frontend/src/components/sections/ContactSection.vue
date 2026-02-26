@@ -8,7 +8,6 @@ const linkedin = 'https://linkedin.com/in/yourprofile'
   <section id="contact" class="section">
     <div class="section__inner">
       <div class="section__header">
-        <span class="section__tag">05. Contact</span>
         <h2 class="section__title">Get In Touch</h2>
       </div>
       <div class="contact__content">
@@ -68,9 +67,11 @@ const linkedin = 'https://linkedin.com/in/yourprofile'
 
 .section__title {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #f1f5f9;
   letter-spacing: -0.5px;
+  padding-left: 0.75rem;
+  border-left: 3px solid #818cf8;
 }
 
 .contact__content {
@@ -94,20 +95,21 @@ const linkedin = 'https://linkedin.com/in/yourprofile'
   align-items: center;
   gap: 0.6rem;
   padding: 0.9rem 2.25rem;
-  background: transparent;
-  color: #818cf8;
-  border: 2px solid #818cf8;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #ffffff;
+  border: none;
   border-radius: 8px;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
 }
 
 .contact__btn:hover {
-  background: rgba(129, 140, 248, 0.1);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(99, 102, 241, 0.5);
 }
 
 .contact__socials {
@@ -132,7 +134,7 @@ const linkedin = 'https://linkedin.com/in/yourprofile'
 }
 
 .site-footer {
-  border-top: 1px solid rgba(99, 102, 241, 0.1);
+  border-top: 1px solid rgba(99, 102, 241, 0.12);
   padding-top: 2rem;
   text-align: center;
   display: flex;

@@ -27,7 +27,6 @@ const skillCategories = [
   <section id="skills" class="section skills-bg">
     <div class="section__inner">
       <div class="section__header">
-        <span class="section__tag">02. Skills</span>
         <h2 class="section__title">Technologies I Work With</h2>
       </div>
       <div class="skills__grid">
@@ -61,9 +60,9 @@ const skillCategories = [
 }
 
 .skills-bg {
-  background: rgba(30, 41, 59, 0.4);
-  border-top: 1px solid rgba(99, 102, 241, 0.08);
-  border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+  background: #0a1020;
+  border-top: 1px solid rgba(99, 102, 241, 0.12);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.12);
 }
 
 .section__inner {
@@ -75,20 +74,13 @@ const skillCategories = [
   margin-bottom: 3rem;
 }
 
-.section__tag {
-  color: #818cf8;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
 .section__title {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #f1f5f9;
   letter-spacing: -0.5px;
+  padding-left: 0.75rem;
+  border-left: 3px solid #8b5cf6;
 }
 
 .skills__grid {
@@ -98,16 +90,17 @@ const skillCategories = [
 }
 
 .skills__card {
-  background: #1e293b;
-  border: 1px solid rgba(99, 102, 241, 0.12);
-  border-radius: 14px;
+  background: rgba(8, 13, 24, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 8px;
   padding: 1.75rem;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .skills__card:hover {
-  border-color: rgba(129, 140, 248, 0.4);
+  border-color: #6366f1;
   transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(99, 102, 241, 0.12);
 }
 
 .card__header {
@@ -134,8 +127,8 @@ const skillCategories = [
 }
 
 .skill-tag {
-  background: rgba(99, 102, 241, 0.1);
-  color: #a5b4fc;
+  background: rgba(99, 102, 241, 0.08);
+  color: #818cf8;
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0.3rem 0.75rem;
@@ -145,7 +138,7 @@ const skillCategories = [
 }
 
 .skill-tag:hover {
-  background: rgba(99, 102, 241, 0.25);
+  background: rgba(99, 102, 241, 0.18);
   color: #c7d2fe;
 }
 

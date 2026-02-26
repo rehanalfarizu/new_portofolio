@@ -38,7 +38,6 @@ const openLink = (url) => {
   <section id="projects" class="section">
     <div class="section__inner">
       <div class="section__header">
-        <span class="section__tag">03. Projects</span>
         <h2 class="section__title">Featured Work</h2>
       </div>
       <div class="projects__grid">
@@ -116,9 +115,11 @@ const openLink = (url) => {
 
 .section__title {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #f1f5f9;
   letter-spacing: -0.5px;
+  padding-left: 0.75rem;
+  border-left: 3px solid #f59e0b;
 }
 
 .projects__grid {
@@ -128,20 +129,20 @@ const openLink = (url) => {
 }
 
 .project-card {
-  background: #1e293b;
-  border: 1px solid rgba(99, 102, 241, 0.12);
-  border-radius: 14px;
+  background: rgba(8, 13, 24, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 10px;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
 }
 
 .project-card:hover {
-  border-color: rgba(129, 140, 248, 0.4);
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  border-color: #6366f1;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.15);
 }
 
 .project-card--featured {
@@ -155,9 +156,7 @@ const openLink = (url) => {
   margin-bottom: 0.5rem;
 }
 
-.project-card__folder {
-  color: #818cf8;
-}
+.project-card__folder { color: #6366f1; }
 
 .project-card__links {
   display: flex;
@@ -177,9 +176,9 @@ const openLink = (url) => {
 }
 
 .project-card__title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #e2e8f0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f0f6fc;
 }
 
 .project-card__desc {
@@ -199,8 +198,8 @@ const openLink = (url) => {
 .tag {
   font-size: 0.75rem;
   color: #818cf8;
-  font-weight: 600;
-  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
 }
 
 .tag:not(:last-child)::after {

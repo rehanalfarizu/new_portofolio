@@ -2,8 +2,7 @@
   <section id="about" class="section">
     <div class="section__inner">
       <div class="section__header">
-        <span class="section__tag">01. About Me</span>
-        <h2 class="section__title">Who I Am</h2>
+        <h2 class="section__title">About Me</h2>
       </div>
       <div class="about__content">
         <div class="about__text">
@@ -75,20 +74,13 @@
   margin-bottom: 3rem;
 }
 
-.section__tag {
-  color: #818cf8;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
 .section__title {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #f1f5f9;
   letter-spacing: -0.5px;
+  padding-left: 0.75rem;
+  border-left: 3px solid #6366f1;
 }
 
 .about__content {
@@ -153,7 +145,7 @@
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6366f1, #818cf8);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,7 +160,7 @@
   position: absolute;
   inset: -8px;
   border-radius: 50%;
-  border: 2px dashed rgba(129, 140, 248, 0.4);
+  border: 2px dashed rgba(99, 102, 241, 0.4);
   animation: rotateSlow 10s linear infinite;
 }
 
@@ -178,9 +170,9 @@
 }
 
 .about__info-card {
-  background: #1e293b;
+  background: rgba(14, 21, 32, 0.9);
   border: 1px solid rgba(99, 102, 241, 0.15);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.25rem 1.5rem;
   width: 100%;
   display: flex;

@@ -37,7 +37,6 @@ const education = {
   <section id="experience" class="section exp-bg">
     <div class="section__inner">
       <div class="section__header">
-        <span class="section__tag">04. Experience</span>
         <h2 class="section__title">Where I've Worked</h2>
       </div>
       <div class="exp__layout">
@@ -81,9 +80,9 @@ const education = {
 }
 
 .exp-bg {
-  background: rgba(30, 41, 59, 0.4);
-  border-top: 1px solid rgba(99, 102, 241, 0.08);
-  border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+  background: #0a1020;
+  border-top: 1px solid rgba(99, 102, 241, 0.12);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.12);
 }
 
 .section__inner {
@@ -106,9 +105,11 @@ const education = {
 
 .section__title {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #f1f5f9;
   letter-spacing: -0.5px;
+  padding-left: 0.75rem;
+  border-left: 3px solid #a78bfa;
 }
 
 .exp__layout {
@@ -143,9 +144,9 @@ const education = {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #818cf8;
-  border: 2px solid #0f172a;
-  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+  background: #6366f1;
+  border: 2px solid #080d18;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
 }
 
 .exp__body {
@@ -205,7 +206,7 @@ const education = {
   content: '▸';
   position: absolute;
   left: 0;
-  color: #818cf8;
+  color: #6366f1;
 }
 
 .exp__education {
@@ -214,9 +215,9 @@ const education = {
 }
 
 .edu__card {
-  background: #1e293b;
+  background: rgba(8, 13, 24, 0.9);
   border: 1px solid rgba(99, 102, 241, 0.15);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 1.75rem;
   text-align: center;
 }

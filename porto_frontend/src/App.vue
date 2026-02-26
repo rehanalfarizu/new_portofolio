@@ -10,7 +10,7 @@ import Navbar from './components/layout/Navbar.vue'
 
 <style>
 #app {
-  background-color: #0f172a;
+  background-color: #080d18;
   min-height: 100vh;
 }
 </style>
