@@ -7,7 +7,7 @@
       <div class="about__content">
         <div class="about__text">
           <p>
-            I'm a passionate <strong>Full Stack Developer</strong> based in Yogyakarta, Indonesia,
+            I'm a passionate <strong>Backend & Iot Developer</strong> based in Yogyakarta, Indonesia,
             currently studying at AMIKOM University. I enjoy creating elegant solutions to complex
             problems and building applications that make a real impact.
           </p>

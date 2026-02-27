@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import profilImg from '@/assets/profil2.jpeg'
 
 const fullName = 'Muhammad Raihan Alfarizi'
 
@@ -79,7 +80,7 @@ const avatarError = (e) => {
         </h1>
 
         <p class="hero__role">
-          Full Stack Developer
+          Students of Bachelor of Computer Science
           <span class="hero__role-dot">•</span>
           AMIKOM University
         </p>
@@ -142,7 +143,7 @@ const avatarError = (e) => {
         <div class="hero__photo-frame">
           <div class="hero__photo-glow"></div>
           <img
-            src="https://github.com/rehanalfarizu.png"
+            :src="profilImg"
             alt="Muhammad Raihan Alfarizi"
             class="hero__photo"
             @error="avatarError"
@@ -425,8 +426,8 @@ const avatarError = (e) => {
 
 .hero__photo-frame {
   position: relative;
-  width: 340px;
-  height: 340px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -452,8 +453,9 @@ const avatarError = (e) => {
 .hero__photo {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 10%;
   object-fit: cover;
+  object-position: center 100%;
   border: 4px solid rgba(99,102,241,0.35);
   position: relative;
   z-index: 1;

@@ -1,21 +1,42 @@
 <script setup>
+const tagIconMap = {
+  'Laravel':        'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg',
+  'Vue.js 3':       'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg',
+  'Tailwind CSS':   'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg',
+  'MySQL':          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg',
+  'Heroku':         'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/heroku/heroku-original.svg',
+  'Cloudinary':     'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/cloudinary.svg',
+  'PHP 8.4':        'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg',
+  'Azure IoT Hub':  'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg',
+  'Azure Functions':'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg',
+  'Python ML':      'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+  'Babylon.js':     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/babylonjs/babylonjs-original.svg',
+  'ESP32':          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/embeddedc/embeddedc-original.svg',
+  'MQTT':           null,
+  'React':          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+  'REST API':       null,
+  'Chart.js':       'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chartjs/chartjs-original.svg',
+}
+
+const monoIcons = new Set(['Cloudinary', 'MQTT'])
+
 const projects = [
   {
-    title: 'E-Commerce Platform',
+    title: 'Itqom Education 🎓',
     description:
-      'Full-stack e-commerce solution with product catalog, cart management, payment integration, and admin dashboard.',
-    tags: ['Vue.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
-    github: 'https://github.com/rehanalfarizu/ecommerce',
-    demo: null,
+      'ITQoM Platform adalah platform education bootcamp yang menyediakan pembelajaran komprehensif seputar frontend & backend development, UI/UX design, dan fullstack development. Dibangun dengan Laravel + Vue.js 3, di-deploy ke Heroku dengan custom domain, dan dilengkapi Cloudinary untuk media management serta JawsDB MySQL sebagai database.',
+    tags: ['Laravel', 'Vue.js 3', 'Tailwind CSS', 'MySQL', 'Heroku', 'Cloudinary', 'PHP 8.4'],
+    github: 'https://github.com/rehanalfarizu/itqom-education',
+    demo: 'https://itqom-platform.tech',
     featured: true,
   },
   {
-    title: 'Task Management App',
+    title: 'TwinSpace - Digital Twin Dashboard 🏢',
     description:
-      'Real-time collaborative task manager with drag-and-drop boards, team workspaces, and live notifications.',
-    tags: ['Vue.js', 'Firebase', 'TypeScript'],
-    github: 'https://github.com/rehanalfarizu/task-manager',
-    demo: null,
+      'Sistem Digital Twin untuk monitoring energi dan kondisi ruangan secara real-time. Menampilkan visualisasi 3D interaktif (Babylon.js), deteksi orang via YOLO + Webcam, serta rekomendasi suhu AC optimal berbasis Machine Learning (Random Forest & Gradient Boosting). Terintegrasi dengan Azure IoT Hub, Azure Functions, HiveMQ MQTT, dan Azure Storage.',
+    tags: ['Vue.js 3', 'Azure IoT Hub', 'Azure Functions', 'Python ML', 'MQTT', 'Babylon.js', 'ESP32'],
+    github: 'https://github.com/rehanalfarizu/dashboard_digitaltwin',
+    demo: 'https://dashboard-digitaltwin.vercel.app/',
     featured: true,
   },
   {
@@ -85,7 +106,17 @@ const openLink = (url) => {
           <h3 class="project-card__title">{{ project.title }}</h3>
           <p class="project-card__desc">{{ project.description }}</p>
           <div class="project-card__tags">
-            <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
+            <template v-for="tag in project.tags" :key="tag">
+              <img
+                v-if="tagIconMap[tag]"
+                :src="tagIconMap[tag]"
+                :alt="tag"
+                :title="tag"
+                class="tag-icon"
+                :class="{ 'tag-icon--mono': monoIcons.has(tag) }"
+              />
+              <span v-else :title="tag" class="tag-text">{{ tag }}</span>
+            </template>
           </div>
         </article>
       </div>
@@ -191,20 +222,44 @@ const openLink = (url) => {
 .project-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.tag {
-  font-size: 0.75rem;
-  color: #818cf8;
-  font-weight: 500;
-  font-family: 'SFMono-Regular', 'Consolas', monospace;
+.tag-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition: filter 0.2s, transform 0.2s;
+  border-radius: 3px;
 }
 
-.tag:not(:last-child)::after {
-  content: ' ·';
-  color: #475569;
+.tag-icon:not(.tag-icon--mono):hover {
+  filter: grayscale(0%) drop-shadow(0 0 4px rgba(99,102,241,0.6));
+  transform: scale(1.2);
+}
+
+.tag-icon--mono {
+  filter: invert(1) brightness(1.8) sepia(1) saturate(3) hue-rotate(195deg);
+}
+
+.tag-icon--mono:hover {
+  filter: invert(1) brightness(2) sepia(1) saturate(5) hue-rotate(195deg) drop-shadow(0 0 4px rgba(99,102,241,0.6));
+  transform: scale(1.2);
+}
+
+.tag-text {
+  font-size: 0.65rem;
+  color: #818cf8;
+  font-weight: 600;
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.25);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 
 @media (max-width: 640px) {
