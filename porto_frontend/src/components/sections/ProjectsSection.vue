@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 const tagIconMap = {
   'Laravel':        'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg',
   'Vue.js 3':       'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg',
@@ -16,6 +17,19 @@ const tagIconMap = {
   'React':          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
   'REST API':       null,
   'Chart.js':       'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chartjs/chartjs-original.svg',
+  'Python':         'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+  'TensorFlow':     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg',
+  'Keras':          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/keras/keras-original.svg',
+  'scikit-learn':   'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg',
+  'Jupyter':        'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original.svg',
+  'Transformer':    null,
+  'LSTM':           null,
+  'PySpark':        'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachespark/apachespark-original.svg',
+  'Apache Spark':   'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachespark/apachespark-original.svg',
+  'NLTK':           null,
+  'Streamlit':      'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg',
+  'Parquet':        null,
+  'MLlib':          null,
 }
 
 const monoIcons = new Set(['Cloudinary', 'MQTT'])
@@ -40,19 +54,86 @@ const projects = [
     featured: true,
   },
   {
-    title: 'Weather Dashboard',
+    title: 'Stack Overflow Analytics 📊',
     description:
-      'Interactive weather application with data visualization, geolocation support, and 7-day forecast.',
-    tags: ['React', 'REST API', 'Chart.js'],
-    github: 'https://github.com/rehanalfarizu/weather-dashboard',
-    demo: null,
-    featured: false,
+      'Platform Big Data analytics untuk menganalisis Stack Overflow Data Dump menggunakan Apache Spark (PySpark) dan NLP. Mencakup ETL pipeline (XML → Parquet), text preprocessing, TF-IDF, sentiment analysis, topic modeling, serta prediksi kualitas pertanyaan & deteksi duplikat dengan Spark MLlib.',
+    tags: ['PySpark', 'Python', 'NLTK', 'Streamlit', 'Jupyter', 'MLlib', 'Parquet'],
+    github: 'https://github.com/rehanalfarizu/stackoverflow-analytics-pyspark-nlp',
+    demo: 'https://colab.research.google.com/github/rehanalfarizu/stackoverflow-analytics-pyspark-nlp/blob/main/notebooks/stackoverflow_analytics_colab.ipynb',
+    featured: true,
+  },
+  {
+    title: 'Deteksi Anomali Log Sistem 🔍',
+    description:
+      'Sistem deteksi anomali pada log sistem menggunakan Deep Learning berbasis sequence. Mengimplementasikan LSTM, GRU, Bi-LSTM, CNN-LSTM, Autoencoder, dan Transformer dengan multi-head self-attention. Mendukung transfer learning (GloVe, FastText, Word2Vec) dan dataset publik HDFS, BGL, Thunderbird dari LogHub.',
+    tags: ['Python', 'TensorFlow', 'Keras', 'scikit-learn', 'Jupyter', 'Transformer', 'LSTM'],
+    github: 'https://github.com/rehanalfarizu/-Deteksi-Anomali-Log-Sistem-Menggunakan-Model-Sequence-Berbasis-Deep-Learning',
+    demo: 'https://colab.research.google.com/github/rehanalfarizu/-Deteksi-Anomali-Log-Sistem-Menggunakan-Model-Sequence-Berbasis-Deep-Learning/blob/main/notebooks/Anomaly_Detection_Colab.ipynb',
+    featured: true,
+  },
+    {
+    title: 'Analisis dan Prediksi Data dengan Pendekatan Big Data Mining 📈',
+    description:
+      'Proyek ini mengimplementasikan berbagai teknik Big Data Mining untuk menganalisis data customer dari perusahaan e-commerce. Melibatkan preprocessing data besar, clustering dengan K-Means, klasifikasi dengan Random Forest dan SVM, serta visualisasi hasil analisis menggunakan Metode Association Rules, RFM Analysis, dan Klasifikasi',
+    tags: ['Python', 'TensorFlow', 'Keras', 'scikit-learn', 'Jupyter', 'Transformer', 'LSTM'],
+    github: 'https://github.com/rehanalfarizu/big-data-mining-.git',
+    demo: 'https://colab.research.google.com/github/rehanalfarizu/big-data-mining-/blob/main/Final_Project_BigData_Mining.ipynb',
+    featured: true,
   },
 ]
 
 const openLink = (url) => {
   if (url) window.open(url, '_blank', 'noopener,noreferrer')
 }
+
+// Certificate modal
+const selectedCert = ref(null)
+const openCert = (cert) => { selectedCert.value = cert }
+const closeCert = () => { selectedCert.value = null }
+const onKeydown = (e) => { if (e.key === 'Escape') closeCert() }
+
+const certificates = [
+  {
+    title: 'Sertifikat Ignition 2025',
+    issuer: 'Lomba Ignition 2025',
+    date: '2025',
+    logo: 'https://www.google.com/s2/favicons?domain=amikom.ac.id&sz=64',
+    credential: null,
+    pdf: '/certs/Sertifikat Ignition Muhammad Raihan Al Farizi.pdf',
+  },
+  {
+    title: 'Sertifikat Course Introduction to Financial Literacy',
+    issuer: 'Dicoding Indonesia',
+    date: 'Jan 2026',
+    logo: 'https://www.google.com/s2/favicons?domain=dicoding.com&sz=64',
+    credential: 'https://www.dicoding.com/certificates/',
+    pdf: '/certs/sertifikat_course_905_4648513_300126191943.pdf',
+  },
+  {
+    title: 'Sertifikat Asisten Praktikum Multimedia',
+    issuer: 'Universitas Amikom Yogyakarta',
+    date: '2025',
+    logo: 'https://www.google.com/s2/favicons?domain=amikom.ac.id&sz=64',
+    credential: null,
+    pdf: '/certs/1755775423290.pdf',
+  },
+  {
+    title: 'Sertifikat Asisten Praktikum UI/UX',
+    issuer: 'Universitas Amikom Yogyakarta',
+    date: '2025',
+    logo: 'https://www.google.com/s2/favicons?domain=amikom.ac.id&sz=64',
+    credential: null,
+    pdf: '/certs/1755775846714.pdf',
+  },
+  {
+    title: 'Sertifikat Amikom Arena Creative Application Digital Innovation And Multimedia',
+    issuer: 'Universitas Amikom Yogyakarta',
+    date: '2026',
+    logo: 'https://www.google.com/s2/favicons?domain=amikom.ac.id&sz=64',
+    credential: null,
+    pdf: '/certs/sertifikat arcadia.pdf',
+  },
+]
 </script>
 
 <template>
@@ -120,6 +201,113 @@ const openLink = (url) => {
           </div>
         </article>
       </div>
+
+      <!-- ── Certificates ── -->
+      <div class="section__header certs__header">
+        <h2 class="section__title">Certificates</h2>
+      </div>
+      <div class="certs__grid">
+        <div
+          v-for="cert in certificates"
+          :key="cert.title"
+          class="cert-card"
+          @click="openCert(cert)"
+        >
+          <div class="cert-card__thumb">
+            <object
+              :data="cert.pdf + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH'"
+              type="application/pdf"
+              class="cert-card__thumb-object"
+              aria-label="Certificate preview"
+            >
+              <div class="cert-card__thumb-fallback">
+                <svg viewBox="0 0 60 80" fill="none" width="48" height="64">
+                  <rect x="5" y="5" width="50" height="65" rx="4" fill="rgba(99,102,241,0.12)" stroke="rgba(99,102,241,0.3)" stroke-width="1.5"/>
+                  <rect x="12" y="18" width="30" height="3" rx="1.5" fill="rgba(99,102,241,0.4)"/>
+                  <rect x="12" y="26" width="36" height="2" rx="1" fill="rgba(99,102,241,0.25)"/>
+                  <rect x="12" y="32" width="28" height="2" rx="1" fill="rgba(99,102,241,0.25)"/>
+                  <rect x="12" y="38" width="32" height="2" rx="1" fill="rgba(99,102,241,0.25)"/>
+                </svg>
+                <span class="cert-card__thumb-label">PDF</span>
+              </div>
+            </object>
+            <div class="cert-card__thumb-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <span>Lihat Sertifikat</span>
+            </div>
+          </div>
+          <div class="cert-card__body">
+            <div class="cert-card__header">
+              <img :src="cert.logo" :alt="cert.issuer" class="cert-card__logo" />
+              <div>
+                <p class="cert-card__title">{{ cert.title }}</p>
+                <p class="cert-card__meta">
+                  <span class="cert-card__issuer">{{ cert.issuer }}</span>
+                  <span class="cert-card__date">{{ cert.date }}</span>
+                </p>
+              </div>
+            </div>
+            <a
+              v-if="cert.credential"
+              :href="cert.credential"
+              target="_blank"
+              rel="noopener"
+              class="cert-card__link"
+              @click.stop
+            >Lihat Credential →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Certificate Lightbox Modal ── -->
+      <Teleport to="body">
+        <Transition name="modal">
+          <div
+            v-if="selectedCert"
+            class="cert-modal"
+            @click.self="closeCert"
+            @keydown="onKeydown"
+            tabindex="-1"
+          >
+            <div class="cert-modal__box">
+              <button class="cert-modal__close" @click="closeCert" aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+              <object
+                :data="selectedCert.pdf + '#toolbar=1&navpanes=0&scrollbar=1&view=FitH'"
+                type="application/pdf"
+                class="cert-modal__pdf"
+              >
+                <div class="cert-modal__pdf-fallback">
+                  <p>Browser tidak bisa menampilkan PDF.</p>
+                  <a :href="selectedCert.pdf" target="_blank" class="cert-modal__cta">Buka PDF ↗</a>
+                </div>
+              </object>
+              <div class="cert-modal__footer">
+                <div class="cert-modal__info">
+                  <img :src="selectedCert.logo" :alt="selectedCert.issuer" class="cert-modal__logo" />
+                  <div>
+                    <p class="cert-modal__title">{{ selectedCert.title }}</p>
+                    <p class="cert-modal__issuer">{{ selectedCert.issuer }} · {{ selectedCert.date }}</p>
+                  </div>
+                </div>
+                <a
+                  :href="selectedCert.pdf"
+                  target="_blank"
+                  rel="noopener"
+                  class="cert-modal__cta"
+                >Buka PDF ↗</a>
+              </div>
+            </div>
+          </div>
+        </Transition>
+      </Teleport>
     </div>
   </section>
 </template>
@@ -266,5 +454,297 @@ const openLink = (url) => {
   .projects__grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── Certificates ── */
+.certs__header {
+  margin-top: 4rem;
+}
+
+.certs__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.cert-card {
+  background: rgba(8, 13, 24, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.25s, transform 0.22s, box-shadow 0.25s;
+}
+
+.cert-card:hover {
+  border-color: #6366f1;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.18);
+}
+
+/* Thumbnail */
+.cert-card__thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid rgba(99,102,241,0.15);
+}
+
+.cert-card__thumb-object {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  border: none;
+}
+
+.cert-card__thumb-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(10,12,28,0.95), rgba(30,25,60,0.8));
+}
+
+.cert-card__thumb-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #6366f1;
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.25);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.cert-card__thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 30, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.25s;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.cert-card:hover .cert-card__thumb-overlay {
+  opacity: 1;
+}
+
+/* Body */
+.cert-card__body {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cert-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.cert-card__logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cert-card__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  line-height: 1.4;
+}
+
+.cert-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.cert-card__issuer {
+  font-size: 0.72rem;
+  color: #818cf8;
+  font-weight: 500;
+}
+
+.cert-card__date {
+  font-size: 0.68rem;
+  color: #475569;
+}
+
+.cert-card__date::before {
+  content: '·';
+  margin-right: 0.4rem;
+}
+
+.cert-card__link {
+  font-size: 0.72rem;
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+  align-self: flex-start;
+}
+
+.cert-card__link:hover {
+  color: #a5b4fc;
+}
+
+/* ── Lightbox Modal ── */
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 18, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.cert-modal__box {
+  position: relative;
+  background: #0d1117;
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  width: min(900px, 96vw);
+  height: min(90vh, 900px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.8);
+}
+
+.cert-modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  background: rgba(15, 20, 40, 0.9);
+  border: 1px solid rgba(99,102,241,0.25);
+  border-radius: 8px;
+  color: #94a3b8;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cert-modal__close:hover {
+  background: rgba(99,102,241,0.2);
+  color: #f1f5f9;
+}
+
+.cert-modal__pdf {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: block;
+  background: #fff;
+}
+
+.cert-modal__pdf-fallback {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  padding: 2rem;
+}
+
+.cert-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1.25rem;
+  border-top: 1px solid rgba(99,102,241,0.12);
+  flex-shrink: 0;
+}
+
+.cert-modal__info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cert-modal__logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.cert-modal__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.cert-modal__issuer {
+  font-size: 0.75rem;
+  color: #818cf8;
+  margin-top: 0.15rem;
+}
+
+.cert-modal__cta {
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: #6366f1;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.cert-modal__cta:hover {
+  background: #818cf8;
+}
+
+/* Modal transition */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.22s ease;
+}
+
+.modal-enter-active .cert-modal__box,
+.modal-leave-active .cert-modal__box {
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .cert-modal__box,
+.modal-leave-to .cert-modal__box {
+  transform: scale(0.94);
+  opacity: 0;
 }
 </style>

@@ -1,7 +1,7 @@
 <script setup>
 const email = 'rehanalfarizi@students.amikom.ac.id'
 const github = 'https://github.com/rehanalfarizu'
-const linkedin = 'https://linkedin.com/in/yourprofile'
+const linkedin = 'https://linkedin.com/in/muhammad-raihan-alfarizi-0396b2321'
 </script>
 
 <template>

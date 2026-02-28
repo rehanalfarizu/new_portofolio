@@ -33,7 +33,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   >
     <div class="navbar__inner">
       <a class="navbar__brand" href="#" @click.prevent="scrollTo('#hero')">
-        <span class="brand-dot">&lt;</span>RA<span class="brand-dot">/&gt;</span>
+        <img src="/certs/Sun_Pirates_Jolly_Roger.svg" alt="Logo" class="brand-logo" />
+        <span class="brand-name"><span class="brand-first">rehan</span> alfarizi</span>
       </a>
 
       <!-- Desktop Nav -->
@@ -91,15 +92,31 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .navbar__brand {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   text-decoration: none;
-  letter-spacing: -0.5px;
 }
 
-.brand-dot {
-  color: #6366f1;
+.brand-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  letter-spacing: -0.3px;
+}
+
+.brand-first {
+  color: #f1f5f9;
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+  transition: transform 0.2s ease;
+}
+
+.navbar__brand:hover .brand-logo {
+  transform: scale(1.1);
 }
 
 .navbar__links {

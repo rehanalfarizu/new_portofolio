@@ -43,14 +43,99 @@ function blinkCursor() {
   cursorTimer = setTimeout(blinkCursor, 530)
 }
 
-onMounted(() => { typeStep(); blinkCursor() })
-onUnmounted(() => { clearTimeout(typingTimer); clearTimeout(cursorTimer) })
+// ── Code window typing ──
+const codeLines = [
+  { tokens: [{ t: 'keyword', v: 'const' }, { t: 'plain', v: ' identity ' }, { t: 'op', v: '=' }, { t: 'plain', v: ' {' }] },
+  { tokens: [{ t: 'plain', v: '  ' }, { t: 'key', v: 'name' }, { t: 'op', v: ':' }, { t: 'string', v: ' "Raihan",' }] },
+  { tokens: [{ t: 'plain', v: '  ' }, { t: 'key', v: 'role' }, { t: 'op', v: ':' }, { t: 'string', v: ' "FullStack Dev",' }] },
+  { tokens: [{ t: 'plain', v: '  ' }, { t: 'key', v: 'stack' }, { t: 'op', v: ':' }, { t: 'plain', v: ' [' }, { t: 'string', v: '"Vue"' }, { t: 'plain', v: ', ' }, { t: 'string', v: '"Python"' }, { t: 'plain', v: '],' }] },
+  { tokens: [{ t: 'plain', v: '}' }] },
+]
+
+const codeVisible = ref([])   // array of fully-typed line indices
+const codeCurrent = ref('')   // currently typing line text
+const codeLineIdx = ref(0)
+const codeCharIdx = ref(0)
+const codeShowCursor = ref(true)
+let codeTimer = null
+let codeCursorTimer = null
+
+function flatLine(idx) {
+  return codeLines[idx].tokens.map(t => t.v).join('')
+}
+
+function codeTypeStep() {
+  const line = flatLine(codeLineIdx.value)
+  if (codeCharIdx.value < line.length) {
+    codeCurrent.value = line.substring(0, codeCharIdx.value + 1)
+    codeCharIdx.value++
+    codeTimer = setTimeout(codeTypeStep, 55)
+  } else {
+    codeVisible.value.push(codeLineIdx.value)
+    codeCurrent.value = ''
+    codeCharIdx.value = 0
+    codeLineIdx.value++
+    if (codeLineIdx.value >= codeLines.length) {
+      codeTimer = setTimeout(() => {
+        codeVisible.value = []
+        codeLineIdx.value = 0
+        codeTimer = setTimeout(codeTypeStep, 400)
+      }, 2800)
+    } else {
+      codeTimer = setTimeout(codeTypeStep, 120)
+    }
+  }
+}
+
+function blinkCodeCursor() {
+  codeShowCursor.value = !codeShowCursor.value
+  codeCursorTimer = setTimeout(blinkCodeCursor, 530)
+}
+
+function tokenClass(type) {
+  return `ct-${type}`
+}
+
+onMounted(() => { typeStep(); blinkCursor(); codeTypeStep(); blinkCodeCursor() })
+onUnmounted(() => { clearTimeout(typingTimer); clearTimeout(cursorTimer); clearTimeout(codeTimer); clearTimeout(codeCursorTimer) })
 
 const scrollTo = (id) => document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
 
 const avatarError = (e) => {
   e.target.style.display = 'none'
   e.target.nextElementSibling?.classList.remove('hidden')
+}
+
+// 3D card tilt
+const cardStyle = ref({})
+const glareStyle = ref({ opacity: 0 })
+
+function onCardMouseMove(e) {
+  const rect = e.currentTarget.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+  const cx = rect.width / 2
+  const cy = rect.height / 2
+  const rotX = ((y - cy) / cy) * -14
+  const rotY = ((x - cx) / cx) * 14
+  const gx = (x / rect.width) * 100
+  const gy = (y / rect.height) * 100
+  cardStyle.value = {
+    transform: `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.045,1.045,1.045)`,
+    transition: 'transform 0.08s linear',
+  }
+  glareStyle.value = {
+    opacity: 1,
+    background: `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.22) 0%, transparent 65%)`,
+  }
+}
+
+function onCardMouseLeave() {
+  cardStyle.value = {
+    transform: 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)',
+    transition: 'transform 0.55s cubic-bezier(.23,1,.32,1)',
+  }
+  glareStyle.value = { opacity: 0, transition: 'opacity 0.4s' }
 }
 </script>
 
@@ -80,9 +165,9 @@ const avatarError = (e) => {
         </h1>
 
         <p class="hero__role">
-          Students of Bachelor of Computer Science
+          Students of Bachelor Computer Science
           <span class="hero__role-dot">•</span>
-          AMIKOM University
+          AMIKOM Yogyakarta University
         </p>
 
         <p class="hero__bio">
@@ -118,7 +203,7 @@ const avatarError = (e) => {
             </svg>
           </a>
           <a
-            href="https://linkedin.com/in/yourprofile"
+            href="https://linkedin.com/in/muhammad-raihan-alfarizi-0396b2321"
             target="_blank" rel="noopener"
             class="hero__social" aria-label="LinkedIn"
           >
@@ -129,7 +214,7 @@ const avatarError = (e) => {
           <a
             href="mailto:rehanalfarizi@students.amikom.ac.id"
             class="hero__social" aria-label="Email"
-          >
+     Muhammad Raihan Alfarizi     >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="19" height="19">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
@@ -139,8 +224,12 @@ const avatarError = (e) => {
       </div>
 
       <!-- ── RIGHT: Photo ── -->
-      <div class="hero__photo-wrap">
-        <div class="hero__photo-frame">
+      <div
+        class="hero__photo-wrap"
+        @mousemove="onCardMouseMove"
+        @mouseleave="onCardMouseLeave"
+      >
+        <div class="hero__photo-frame" :style="cardStyle">
           <div class="hero__photo-glow"></div>
           <img
             :src="profilImg"
@@ -149,13 +238,37 @@ const avatarError = (e) => {
             @error="avatarError"
           />
           <div class="hero__photo-fallback hidden">RA</div>
+
+          <!-- Code editor — inside frame, sticks out bottom-left, tilts with 3D card -->
+          <div class="code-win">
+            <div class="code-win__bar">
+              <span class="code-win__dot code-win__dot--r"></span>
+              <span class="code-win__dot code-win__dot--y"></span>
+              <span class="code-win__dot code-win__dot--g"></span>
+              <span class="code-win__title">app.js</span>
+            </div>
+            <div class="code-win__body">
+              <div v-for="(lineIdx, i) in codeVisible" :key="'done-'+i" class="code-win__line">
+                <span class="code-win__ln">{{ lineIdx + 1 }}</span>
+                <span v-for="(tok, ti) in codeLines[lineIdx].tokens" :key="ti" :class="tokenClass(tok.t)">{{ tok.v }}</span>
+              </div>
+              <div v-if="codeLineIdx < codeLines.length" class="code-win__line">
+                <span class="code-win__ln">{{ codeLineIdx + 1 }}</span>
+                <span class="ct-plain">{{ codeCurrent }}</span><span
+                  class="code-win__caret"
+                  :class="{ 'code-win__caret--off': !codeShowCursor }"
+                >▊</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Glare overlay -->
+          <div class="hero__card-glare" :style="glareStyle"></div>
+          <!-- Card edge shine -->
+          <div class="hero__card-edge"></div>
         </div>
 
-        <!-- Floating tech labels -->
-        <div class="hero__chip hero__chip--tl">Vue.js</div>
-        <div class="hero__chip hero__chip--tr">Node.js</div>
-        <div class="hero__chip hero__chip--bl">Python</div>
-        <div class="hero__chip hero__chip--br">TypeScript</div>
+
       </div>
     </div>
 
@@ -193,6 +306,7 @@ const avatarError = (e) => {
   filter: blur(90px);
   opacity: 0.35;
   pointer-events: none;
+  z-index: 2;
 }
 
 .hero__bg-blob--1 {
@@ -218,6 +332,7 @@ const avatarError = (e) => {
   background-image: radial-gradient(circle, rgba(99,102,241,0.12) 1px, transparent 1px);
   background-size: 32px 32px;
   pointer-events: none;
+  z-index: 2;
 }
 
 /* ── Container ── */
@@ -230,7 +345,7 @@ const avatarError = (e) => {
   gap: 4rem;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
 /* ════════════
@@ -324,7 +439,7 @@ const avatarError = (e) => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   letter-spacing: 0.01em;
 }
 
@@ -422,27 +537,36 @@ const avatarError = (e) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 60px; /* room for code-win bottom that hangs below frame */
+  /* perspective is applied via JS per-card for accuracy */
 }
 
 .hero__photo-frame {
   position: relative;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
+  width: 380px;
+  height: 420px;
+  border-radius: 24px;
   flex-shrink: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+  cursor: pointer;
+  overflow: visible; /* allow code-win to hang outside the frame */
+  /* default perspective so it looks right before hover */
+  transform: perspective(900px) rotateX(0deg) rotateY(0deg);
 }
 
 .hero__photo-glow {
   position: absolute;
-  inset: -16px;
-  border-radius: 50%;
+  inset: -18px;
+  border-radius: 32px;
   background: conic-gradient(
     from 0deg,
     #6366f1, #8b5cf6, #c084fc, #818cf8, #6366f1
   );
-  filter: blur(18px);
-  opacity: 0.6;
+  filter: blur(22px);
+  opacity: 0.55;
   animation: rotateConic 6s linear infinite;
+  z-index: 0;
 }
 
 @keyframes rotateConic {
@@ -453,19 +577,22 @@ const avatarError = (e) => {
 .hero__photo {
   width: 100%;
   height: 100%;
-  border-radius: 10%;
+  border-radius: 20px;
   object-fit: cover;
   object-position: center 100%;
-  border: 4px solid rgba(99,102,241,0.35);
+  border: 2px solid rgba(99,102,241,0.4);
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 40px rgba(99,102,241,0.3);
+  display: block;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.04) inset;
 }
 
 .hero__photo-fallback {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 20px;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   display: flex;
   align-items: center;
@@ -475,11 +602,30 @@ const avatarError = (e) => {
   color: white;
   position: relative;
   z-index: 1;
-  border: 4px solid rgba(99,102,241,0.35);
 }
 
 .hero__photo-fallback.hidden {
   display: none;
+}
+
+/* Glare / specular highlight */
+.hero__card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+
+/* Subtle inner edge highlight */
+.hero__card-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(0,0,0,0.25);
 }
 
 /* ── Floating Chips ── */
@@ -529,6 +675,100 @@ const avatarError = (e) => {
   50%       { transform: translateY(-6px); }
 }
 
+/* ══════════════════════════════
+   Code Window Overlay
+═══════════════════════════════ */
+.code-win {
+  position: absolute;
+  bottom: -48px;   /* hangs ~half out of the frame — looks attached */
+  left: -14px;
+  width: 220px;
+  background: rgba(18, 22, 40, 0.95);
+  border: 1px solid rgba(99,102,241,0.45);
+  border-radius: 10px;
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(255,255,255,0.05) inset,
+    0 -1px 0 rgba(99,102,241,0.3);   /* top border fade into photo */
+  z-index: 10;
+  overflow: hidden;
+  animation: codeWinFloat 4s ease-in-out infinite;
+}
+
+@keyframes codeWinFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+
+.code-win__bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.code-win__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.code-win__dot--r { background: #ff5f57; }
+.code-win__dot--y { background: #febc2e; }
+.code-win__dot--g { background: #28c840; }
+
+.code-win__title {
+  font-size: 0.65rem;
+  color: #64748b;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  margin-left: 4px;
+  letter-spacing: 0.02em;
+}
+
+.code-win__body {
+  padding: 8px 6px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.68rem;
+  line-height: 1.7;
+  min-height: 80px;
+}
+
+.code-win__line {
+  display: flex;
+  align-items: baseline;
+  white-space: pre;
+}
+
+.code-win__ln {
+  color: #334155;
+  width: 14px;
+  text-align: right;
+  margin-right: 10px;
+  flex-shrink: 0;
+  font-size: 0.6rem;
+  user-select: none;
+}
+
+.ct-keyword { color: #c084fc; }
+.ct-key     { color: #93c5fd; }
+.ct-string  { color: #86efac; }
+.ct-op      { color: #94a3b8; }
+.ct-plain   { color: #e2e8f0; }
+
+.code-win__caret {
+  color: #818cf8;
+  transition: opacity 0.1s;
+  margin-left: 1px;
+}
+
+.code-win__caret--off {
+  opacity: 0;
+}
+
 /* ── Scroll indicator ── */
 .hero__scroll-indicator {
   position: absolute;
@@ -543,7 +783,7 @@ const avatarError = (e) => {
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  z-index: 1;
+  z-index: 3;
 }
 
 .hero__scroll-mouse {
@@ -616,7 +856,7 @@ const avatarError = (e) => {
 
   .hero__photo-frame {
     width: 260px;
-    height: 260px;
+    height: 290px;
   }
 
   .hero__chip--tl { top: 8px;  left: -10px; }
@@ -632,7 +872,7 @@ const avatarError = (e) => {
 
   .hero__photo-frame {
     width: 200px;
-    height: 200px;
+    height: 225px;
   }
 
   .hero__chip {

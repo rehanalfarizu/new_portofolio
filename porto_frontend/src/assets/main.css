@@ -3,12 +3,55 @@
 @tailwind components;
 @tailwind utilities;
 
-.before-enter {
-opacity: 0;
-transform: translateY(100px);
-transition: all 1s ease-out;
+/* ═══════════════════════════════════════════════════════════════
+   v-reveal  — scroll-triggered entrance animations
+   Directive adds:  data-reveal="<variant>"
+   IntersectionObserver adds: .is-visible  when in viewport
+═══════════════════════════════════════════════════════════════ */
+
+/* Shared transition on every reveal element */
+[data-reveal] {
+  transition:
+    opacity  0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
-.enter {
-opacity: 1;
-transform: translateY(0px);
+
+/* ── Initial (hidden) states ───────────────────────────────── */
+
+/* About  — slides in from the left */
+[data-reveal="fade-left"] {
+  opacity: 0;
+  transform: translateX(-70px);
+}
+
+/* Skills — scales up from below */
+[data-reveal="zoom-up"] {
+  opacity: 0;
+  transform: scale(0.88) translateY(48px);
+}
+
+/* Projects — 3-D flip from the top edge */
+[data-reveal="flip-up"] {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(16deg) translateY(52px);
+  transform-origin: top center;
+}
+
+/* Experience — slides in from the right */
+[data-reveal="fade-right"] {
+  opacity: 0;
+  transform: translateX(70px);
+}
+
+/* Contact — fades up from below */
+[data-reveal="fade-up"] {
+  opacity: 0;
+  transform: translateY(56px);
+}
+
+/* ── Revealed (visible) state — same for every variant ──────── */
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
 }

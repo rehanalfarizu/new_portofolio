@@ -1,27 +1,27 @@
 <script setup>
 const experiences = [
   {
-    role: 'Full Stack Developer',
-    company: 'Freelance',
-    period: '2023 – Present',
+    role: 'Asisten Dosen UI/UX Designer',
+    company: 'Universitas Amikom Yogyakarta',
+    period: '2025 - 2026',
     description:
-      'Developing and delivering end-to-end web applications for clients. Building responsive frontends with Vue.js and React, and scalable REST APIs with Node.js and Python/FastAPI.',
+      'Membantu dosen dalam pengajaran mata kuliah UI/UX Design. Memberikan bimbingan kepada mahasiswa dalam memahami prinsip desain, melakukan review tugas, dan memberikan feedback konstruktif untuk meningkatkan kualitas desain mereka.',
     achievements: [
-      'Delivered 3+ client projects from design to deployment',
-      'Reduced API response times by 40% through query optimization',
-      'Implemented CI/CD pipelines using GitHub Actions',
+      'Membantu lebih dari 20 mahasiswa dalam memahami konsep UI/UX',
+      'Menyusun materi pembelajaran tambahan untuk topik desain responsif',
+      'Mendapatkan feedback positif dari dosen dan mahasiswa atas kontribusi dalam pembelajaran',
     ],
   },
   {
-    role: 'Frontend Developer Intern',
-    company: 'Tech Startup – Yogyakarta',
-    period: '2022 – 2023',
+    role: 'Asisten Dosen Multimedia',
+    company: 'Universitas Amikom Yogyakarta',
+    period: '2025 – 2026',
     description:
-      'Contributed to front-end development of an internal SaaS dashboard product. Collaborated with the design team to implement responsive UI components.',
+      'Membantu dosen dalam pengajaran mata kuliah Multimedia. Memberikan bimbingan kepada mahasiswa dalam memahami konsep multimedia, melakukan review tugas, dan memberikan feedback konstruktif untuk meningkatkan kualitas karya mereka.',
     achievements: [
-      'Built reusable component library using Vue 3 + TypeScript',
-      'Improved Lighthouse performance score from 65 to 92',
-      'Integrated third-party APIs (payment, maps, analytics)',
+      'Membantu lebih dari 20 mahasiswa dalam memahami konsep multimedia',
+      'Menyusun materi pembelajaran tambahan untuk topik multimedia dengan software Adobe After Effects dan Adobe Premiere Pro',
+      'Mendapatkan feedback positif dari dosen dan mahasiswa atas kontribusi dalam pembelajaran',
     ],
   },
 ]
@@ -29,7 +29,7 @@ const experiences = [
 const education = {
   degree: 'S1 Informatika',
   institution: 'Universitas Amikom Yogyakarta',
-  period: '2021 – Present',
+  period: '2023 – Present',
 }
 </script>
 
@@ -139,14 +139,15 @@ const education = {
 
 .exp__dot {
   position: absolute;
-  left: -1.72rem;
-  top: 0.3rem;
-  width: 12px;
-  height: 12px;
+  left: calc(-1.5rem - 7px);
+  top: 0.25rem;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: #6366f1;
-  border: 2px solid #080d18;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+  border: 2px solid #0a1020;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+  flex-shrink: 0;
 }
 
 .exp__body {
