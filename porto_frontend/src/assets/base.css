@@ -24,6 +24,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -32,6 +33,9 @@ body {
   background: var(--color-bg);
   scrollbar-color: #1e293b #080d18;
   line-height: 1.6;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+  overflow-x: hidden;
   font-family:
     Inter,
     -apple-system,

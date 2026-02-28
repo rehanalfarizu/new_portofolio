@@ -454,6 +454,9 @@ const certificates = [
   .projects__grid {
     grid-template-columns: 1fr;
   }
+  .certs__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Certificates ── */
@@ -538,8 +541,12 @@ const certificates = [
   font-weight: 600;
 }
 
-.cert-card:hover .cert-card__thumb-overlay {
-  opacity: 1;
+/* On touch devices always show the overlay hint */
+@media (hover: none) {
+  .cert-card__thumb-overlay {
+    opacity: 1;
+    background: rgba(10, 10, 30, 0.5);
+  }
 }
 
 /* Body */

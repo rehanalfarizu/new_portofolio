@@ -17,6 +17,32 @@
   will-change: opacity, transform;
 }
 
+/* On mobile — simpler transforms, less GPU pressure */
+@media (max-width: 768px) {
+  [data-reveal="fade-left"],
+  [data-reveal="fade-right"] {
+    transform: translateX(0) !important;
+    opacity: 0;
+  }
+  [data-reveal="zoom-up"] {
+    transform: translateY(28px) !important;
+    opacity: 0;
+  }
+  [data-reveal="flip-up"] {
+    transform: translateY(32px) !important;
+    opacity: 0;
+    perspective: none;
+  }
+  [data-reveal="fade-up"] {
+    transform: translateY(28px) !important;
+    opacity: 0;
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none !important;
+  }
+}
+
 /* ── Initial (hidden) states ───────────────────────────────── */
 
 /* About  — slides in from the left */
