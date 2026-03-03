@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import profilImg from '@/assets/profil2.jpeg'
+import profilImg from '@/assets/profil3.jpeg'
 
 const fullName = 'Muhammad Raihan Alfarizi'
 
