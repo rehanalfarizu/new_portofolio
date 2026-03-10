@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import profilImg from '@/assets/profil3.jpeg'
+import profilImg from '@/assets/profil3_opt.jpeg'
 
 const fullName = 'Muhammad Raihan Alfarizi'
 
@@ -212,9 +212,9 @@ function onCardMouseLeave() {
             </svg>
           </a>
           <a
-            href="mailto:rehanalfarizi@students.amikom.ac.id"
+            href="mailto:muhammadraihanalfarizi799@gmail.com"
             class="hero__social" aria-label="Email"
-     Muhammad Raihan Alfarizi     >
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="19" height="19">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
@@ -235,6 +235,8 @@ function onCardMouseLeave() {
             :src="profilImg"
             alt="Muhammad Raihan Alfarizi"
             class="hero__photo"
+            width="380"
+            height="420"
             @error="avatarError"
           />
           <div class="hero__photo-fallback hidden">RA</div>

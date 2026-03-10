@@ -3,6 +3,7 @@ import HeroSection from '../components/sections/HeroSection.vue'
 import AboutSection from '../components/sections/AboutSection.vue'
 import SkillsSection from '../components/sections/SkillsSection.vue'
 import ProjectsSection from '../components/sections/ProjectsSection.vue'
+import GitHubContribution from '../components/GitHubContribution.vue'
 import ExperienceSection from '../components/sections/ExperienceSection.vue'
 import ContactSection from '../components/sections/ContactSection.vue'
 </script>
@@ -25,6 +26,11 @@ import ContactSection from '../components/sections/ContactSection.vue'
     <!-- Projects: flip up -->
     <div v-reveal="'flip-up'">
       <ProjectsSection />
+    </div>
+
+    <!-- GitHub Activity: fade up -->
+    <div v-reveal="'fade-up'">
+      <GitHubContribution />
     </div>
 
     <!-- Experience: slide in from right -->

@@ -3,13 +3,14 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
+const activeSection = ref('hero')
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '#about', id: 'about' },
+  { label: 'Skills', href: '#skills', id: 'skills' },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Experience', href: '#experience', id: 'experience' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
 ]
 
 const handleScroll = () => {
@@ -22,8 +23,30 @@ const scrollTo = (href) => {
   if (el) el.scrollIntoView({ behavior: 'smooth' })
 }
 
-onMounted(() => window.addEventListener('scroll', handleScroll))
-onUnmounted(() => window.removeEventListener('scroll', handleScroll))
+let observer = null
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+
+  // Intersection Observer for active section highlighting
+  const sections = document.querySelectorAll('section[id]')
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          activeSection.value = entry.target.id
+        }
+      })
+    },
+    { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' }
+  )
+  sections.forEach((section) => observer.observe(section))
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  if (observer) observer.disconnect()
+})
 </script>
 
 <template>
@@ -40,7 +63,11 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       <!-- Desktop Nav -->
       <ul class="navbar__links">
         <li v-for="link in navLinks" :key="link.href">
-          <a @click.prevent="scrollTo(link.href)" :href="link.href">{{ link.label }}</a>
+          <a
+            @click.prevent="scrollTo(link.href)"
+            :href="link.href"
+            :class="{ active: activeSection === link.id }"
+          >{{ link.label }}</a>
         </li>
       </ul>
 
@@ -56,7 +83,11 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     <div class="navbar__mobile" :class="{ 'navbar__mobile--open': isMobileMenuOpen }">
       <ul>
         <li v-for="link in navLinks" :key="link.href">
-          <a @click.prevent="scrollTo(link.href)" :href="link.href">{{ link.label }}</a>
+          <a
+            @click.prevent="scrollTo(link.href)"
+            :href="link.href"
+            :class="{ active: activeSection === link.id }"
+          >{{ link.label }}</a>
         </li>
       </ul>
     </div>
@@ -134,10 +165,34 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   font-weight: 500;
   transition: color 0.2s;
   cursor: pointer;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #6366f1;
+  border-radius: 2px;
+  transition: width 0.25s ease;
 }
 
 .navbar__links a:hover {
   color: #f1f5f9;
+}
+
+.navbar__links a:hover::after,
+.navbar__links a.active::after {
+  width: 100%;
+}
+
+.navbar__links a.active {
+  color: #f1f5f9;
+  font-weight: 600;
 }
 
 .navbar__hamburger {
@@ -197,10 +252,13 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
+  transition: color 0.2s;
 }
 
-.navbar__mobile a:hover {
+.navbar__mobile a:hover,
+.navbar__mobile a.active {
   color: #f1f5f9;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

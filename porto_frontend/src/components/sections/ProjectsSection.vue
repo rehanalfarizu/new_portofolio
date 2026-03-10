@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 const tagIconMap = {
   'Laravel':        'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg',
   'Vue.js 3':       'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg',
@@ -75,7 +75,7 @@ const projects = [
     title: 'Analisis dan Prediksi Data dengan Pendekatan Big Data Mining 📈',
     description:
       'Proyek ini mengimplementasikan berbagai teknik Big Data Mining untuk menganalisis data customer dari perusahaan e-commerce. Melibatkan preprocessing data besar, clustering dengan K-Means, klasifikasi dengan Random Forest dan SVM, serta visualisasi hasil analisis menggunakan Metode Association Rules, RFM Analysis, dan Klasifikasi',
-    tags: ['Python', 'TensorFlow', 'Keras', 'scikit-learn', 'Jupyter', 'Transformer', 'LSTM'],
+    tags: ['Python', 'scikit-learn', 'Apache Spark', 'Jupyter', 'Streamlit', 'Parquet', 'MLlib'],
     github: 'https://github.com/rehanalfarizu/big-data-mining-.git',
     demo: 'https://colab.research.google.com/github/rehanalfarizu/big-data-mining-/blob/main/Final_Project_BigData_Mining.ipynb',
     featured: true,
@@ -88,8 +88,21 @@ const openLink = (url) => {
 
 // Certificate modal
 const selectedCert = ref(null)
-const openCert = (cert) => { selectedCert.value = cert }
-const closeCert = () => { selectedCert.value = null }
+const modalRef = ref(null)
+const lastFocused = ref(null)
+
+const openCert = async (cert, event) => {
+  lastFocused.value = event?.currentTarget || document.activeElement
+  selectedCert.value = cert
+  await nextTick()
+  modalRef.value?.focus()
+}
+
+const closeCert = () => {
+  selectedCert.value = null
+  nextTick(() => lastFocused.value?.focus())
+}
+
 const onKeydown = (e) => { if (e.key === 'Escape') closeCert() }
 
 const certificates = [
@@ -195,6 +208,10 @@ const certificates = [
                 :title="tag"
                 class="tag-icon"
                 :class="{ 'tag-icon--mono': monoIcons.has(tag) }"
+                loading="lazy"
+                width="22"
+                height="22"
+                @error="(e) => e.target.style.display = 'none'"
               />
               <span v-else :title="tag" class="tag-text">{{ tag }}</span>
             </template>
@@ -211,7 +228,12 @@ const certificates = [
           v-for="cert in certificates"
           :key="cert.title"
           class="cert-card"
-          @click="openCert(cert)"
+          @click="openCert(cert, $event)"
+          tabindex="0"
+          @keydown.enter="openCert(cert, $event)"
+          @keydown.space.prevent="openCert(cert, $event)"
+          role="button"
+          :aria-label="`Lihat sertifikat ${cert.title}`"
         >
           <div class="cert-card__thumb">
             <object
@@ -270,9 +292,15 @@ const certificates = [
             class="cert-modal"
             @click.self="closeCert"
             @keydown="onKeydown"
-            tabindex="-1"
           >
-            <div class="cert-modal__box">
+            <div
+              ref="modalRef"
+              class="cert-modal__box"
+              tabindex="-1"
+              role="dialog"
+              :aria-label="`Sertifikat: ${selectedCert?.title}`"
+              aria-modal="true"
+            >
               <button class="cert-modal__close" @click="closeCert" aria-label="Close">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
                   <line x1="18" y1="6" x2="6" y2="18"/>

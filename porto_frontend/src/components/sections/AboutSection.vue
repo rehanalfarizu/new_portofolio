@@ -53,10 +53,13 @@
             <!-- photo -->
             <div class="photo__frame">
               <img
-                src="@/assets/Rehan.png"
+                src="@/assets/Rehan_opt.jpeg"
                 alt="Rehan Alfarizi"
                 class="photo__img"
                 draggable="false"
+                loading="lazy"
+                width="240"
+                height="240"
               />
             </div>
             <!-- status badge -->
@@ -73,14 +76,33 @@
               <span class="info-value">Yogyakarta, Indonesia</span>
             </div>
             <div class="info-row">
+              <span class="info-label">University</span>
+              <span class="info-value">AMIKOM Yogyakarta</span>
+            </div>
+            <div class="info-row">
               <span class="info-label">Availability</span>
               <span class="info-value available">Open to Work</span>
             </div>
             <div class="info-row">
               <span class="info-label">Email</span>
-              <span class="info-value">rehanalfarizi@students.amikom.ac.id</span>
+              <a href="mailto:muhammadraihanalfarizi799@gmail.com" class="info-value info-link">
+                muhammadraihanalfarizi799@gmail.com
+              </a>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Social</span>
+              <div class="info-socials">
+                <a href="https://github.com/rehanalfarizu" target="_blank" rel="noopener noreferrer" class="social-link">GitHub</a>
+                <a href="https://linkedin.com/in/muhammad-raihan-alfarizi-0396b2321" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+              </div>
             </div>
           </div>
+
+          <!-- Download CV Button -->
+          <a href="/cv-rehan.pdf" download class="btn-cv">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CV
+          </a>
         </div>
 
       </div>
@@ -292,6 +314,62 @@
   border-radius: 50%;
   background: #4ade80;
   box-shadow: 0 0 6px #4ade80;
+}
+
+/* ── Info link ─────────────────────────────────────────────────────────────── */
+.info-link {
+  font-size: 0.875rem;
+  color: #818cf8;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+  word-break: break-all;
+}
+.info-link:hover { color: #a5b4fc; text-decoration: underline; }
+
+/* ── Social links ──────────────────────────────────────────────────────────── */
+.info-socials {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.social-link {
+  font-size: 0.78rem;
+  color: #818cf8;
+  text-decoration: none;
+  border: 1px solid rgba(99,102,241,0.3);
+  padding: 3px 12px;
+  border-radius: 99px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.social-link:hover {
+  background: rgba(99,102,241,0.15);
+  color: #a5b4fc;
+  border-color: rgba(99,102,241,0.6);
+}
+
+/* ── Download CV button ────────────────────────────────────────────────────── */
+.btn-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.6rem;
+  background: linear-gradient(135deg, #6366f1, #4338ca);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.35);
+  width: 100%;
+  justify-content: center;
+}
+.btn-cv:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(99,102,241,0.45);
 }
 
 /* ── Responsive ────────────────────────────────────────────────────────────── */
